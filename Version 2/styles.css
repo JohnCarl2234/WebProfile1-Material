@@ -1,0 +1,208 @@
+/*Material Inspired WebProfile with CSS Grid System
+//Author: John Carl Acosta (carleaux)
+//github: johncarl2234 */
+body {
+    background-color: #EFEBE9;
+}
+.container {
+    display:grid;
+    height: 100vh;
+    margin: 16px;
+    grid-template-rows: 100px auto auto;
+}
+/*header part */
+.element1{
+    background-color: #4E342E;
+    border-radius: 12px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+h1 {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    color:#EFEBE9;
+    text-align: left;
+    margin-left: 10px; 
+}
+#badgeIcon {
+    margin-left: 10px;
+    color:#EFEBE9;
+    animation: badgeIcon 1.5s infinite;
+}
+@keyframes badgeIcon {
+    0% {transform: scale(1);}
+    50% {transform: scale(1.2);}
+    100% {transform: scale(1);}
+}
+.headerT{
+    animation: headerT 1.5s infinite;
+}
+@keyframes headerT {
+    0% {transform: translateX(0%);}
+    50% {transform: translateX(10%);}
+    100% {transform: translateX(0%);}
+}
+/*header part end */
+
+/* main content start */
+.element2{
+    margin-top: 10px;
+    background-color: #5D4037; 
+    border-radius: 12px;
+    color:#EFEBE9;
+    padding: 20px;
+}
+.animated-gradient {
+    background-image: linear-gradient(to right, #795548 0%, #6D4C41 50%, #5D4037 100%);
+    background-size: 500%; /* Larger size for smoother transition */
+    animation: gradient-animation 10s ease-in-out infinite;
+  }
+  
+@keyframes gradient-animation {
+    0% {
+      background-position: 0%;
+    }
+    50% {
+      background-position: 100%;
+    }
+    100% {
+      background-position: 0%;
+    }
+}
+/* profile image container start */
+.image-container{
+    margin-top: 20px;
+    width: 200px; /* Adjust width and height as needed */
+    height: 200px;
+    overflow: hidden; /* Clip overflowing content */
+    border-radius: 50%;
+    position: relative; /* Required for pseudo-element positioning */
+    border: 5px dotted #EFEBE9;
+}
+.image-container.animated {
+    animation: image-container 2s;
+}
+@keyframes image-container {
+    0% {transform: rotate(0deg);}
+    100% {transform: rotate(360deg);}
+}
+.image-container img {
+    display: inline-block;
+    width: 100%; /* Fills the container */
+    height: 100%;
+    border-radius: 50%; /* Optional for rounded image corners */
+}
+.IName {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    text-align: left;
+    margin-top: 10px;
+    margin-left: 10px;
+    font-size: 50px; 
+}
+.IName.animated{
+    animation: IName 2.0s;
+}
+@keyframes IName {
+    0% {transform: translateX(0%);}
+    50% {transform: translateX(10%);}
+    100% {transform: translateX(0%);}
+}
+/* profile image container end*/
+
+.basicinfo {
+    text-align: left;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 0px;
+}
+#infoN {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 24pt;
+}
+#infoN.animated{
+    animation: infoN 2.0s;
+}
+@keyframes infoN {
+    0% {transform: scale(1.0);}
+    50% {transform: scale(1.1);}
+    100% {transform: scale(1.0);}
+}
+#Motto {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 20pt;
+}
+/* main content end */
+
+/* footer content start */
+.element3{
+    margin-top: 10px;
+    background-color: #6D4C41;
+    border-radius: 12px;
+    padding: 20px;
+}
+#explore {
+    margin-top: 10px;
+    width: 100px;
+    height: 100px;
+}
+.headerB {
+    margin-top: 5px;
+}
+#btpParagraph {
+    margin-top: 5px;
+    margin-left: 10px;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 15pt;
+    color:  #EFEBE9;
+}
+label {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 10pt;
+    color:  #795548;
+    margin: 8px;
+}
+.icons-container {
+    padding: 10px;
+    margin-left: 10px;
+    width: 120px;
+    height: 100px; 
+    background-color:#EFEBE9;
+    display: inline-flex;
+    align-items: center; 
+    justify-content: center;
+    border-radius: 20px; 
+}
+#facebookIcon {
+    margin-left: 5px;
+    width: 50px;
+    height: 50px;
+}
+.icons-container:hover{
+    animation: icons-container 1.0s;
+}
+@keyframes icons-container {
+    0% {transform: scale(1);}
+    50% {transform: scale(1.2);}
+    100% {transform: scale(1);}
+}
+
+/* footer content end */
