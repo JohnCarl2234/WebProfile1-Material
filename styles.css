@@ -59,7 +59,7 @@ h1 {
 .animated-gradient {
     background-image: linear-gradient(to right, #795548 0%, #6D4C41 50%, #5D4037 100%);
     background-size: 500%; /* Larger size for smoother transition */
-    animation: gradient-animation 10s ease-in-out infinite;
+    animation: gradient-animation 3s ease-in-out infinite;
   }
   
 @keyframes gradient-animation {
@@ -149,7 +149,7 @@ h1 {
 /* footer content start */
 .element3{
     margin-top: 10px;
-    background-color: #6D4C41;
+    background-color: #4E342E;
     border-radius: 12px;
     padding: 20px;
 }
