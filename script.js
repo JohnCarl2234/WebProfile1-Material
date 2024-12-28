@@ -33,40 +33,30 @@ window.addEventListener('scroll', () => {
   });
 });
 
-// This script requires a Facebook App ID and a valid access token.
-// You can obtain these by creating a Facebook App and generating an access token 
-// with the 'user_photos' permission.
-
-const appId = '1289334458935221';
-const accessToken = 'c883f6f348841303c5b207823c067e8c';
-const imageContainer = document.getElementById('profileImageContainer');
-
-function fetchProfilePicture() {
-  const graphApiUrl = `https://graph.facebook.com/v17.0/me/picture?type=large&access_token=${accessToken}`;
-
-  fetch(graphApiUrl)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
+function checkProfilePictureUpdate() {
+  // Fetch the current profile picture URL
+  fetch('https://graph.facebook.com/v21.0/me/picture?fields=url&access_token=EAASUpJJr57UBO9Vj46aQ6ZCgJmP3wB7shewBJxcvcHbXAZCeIJXuzlT5XfDMx9dPjSGUF7ctNQMQf8ZBCtBfWsxjfuXJcuNwKZBBRCCbg3pndiNyw6qYmwZBbyOuWFZArLdq0GSmnfbigc8rF92SCc3LELfWa3mQDMj9JU4iBaZCLTfDPaZCtOhMnly4cTTAkOGQfW65l6TYMJgKSmaGwS9rlwrUQeH0RjZC46qfZCHhJEoH1stcTHIZBbocayCvAwhYwZDZD')
+    .then(response => response.json())
     .then(data => {
-      if (data.data && data.data.url) {
-        imageContainer.innerHTML = `<img src="${data.data.url}" alt="Profile Picture">`;
-      } else {
-        console.error('Error fetching profile picture URL.');
+      // Get the current profile picture URL from the data
+      const currentProfilePictureUrl = data.url;
+
+      // Check if the current profile picture URL is different from the stored URL
+      if (currentProfilePictureUrl !== localStorage.getItem('profilePictureUrl')) {
+        // Update the HTML img tag with the new URL
+        document.getElementById('profilePicture').src = currentProfilePictureUrl;
+
+        // Store the new profile picture URL in local storage
+        localStorage.setItem('profilePictureUrl', currentProfilePictureUrl);
       }
     })
     .catch(error => {
       console.error('Error fetching profile picture:', error);
-      // Handle errors, e.g., display an error message
-      imageContainer.innerHTML = '<p>Error loading profile picture.</p>';
     });
 }
 
-// Initial fetch
-fetchProfilePicture();
+// Initial check on page load
+checkProfilePictureUpdate();
 
-// Periodically check for updates (e.g., every 5 minutes)
-setInterval(fetchProfilePicture, 300000); // 5 minutes in milliseconds
+// Set an interval to check for updates periodically (e.g., every 5 minutes)
+setInterval(checkProfilePictureUpdate, 5 * 60 * 1000);
