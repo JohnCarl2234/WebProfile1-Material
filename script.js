@@ -34,13 +34,13 @@ window.addEventListener('scroll', () => {
 });
 
 function fetchFacebookProfilePicture() {
-  const accessToken = 'EAASUpJJr57UBOZCyLW7jCMtTfAU8XNZBnII4V5KrfTDRibblvCMgspcEuZBTeHZCCHoUmJvMF9QBnfFFFvXQDBA3zkXqrBRZBixANVL6evZB8aZAiT52QLYBo9ic3AXE7LgMZC74oUpZBnUj0i8zZAyCox4y6CC7bn2cZBCZBapucMVhSdLKdqV6NgEbRjDjbmpdSNwe6N92tiGxZBCXlSTGBDQZDZD'; // Replace with your actual access token
-  const apiUrl = `https://graph.facebook.com/v21.0/me/picture?fields=url&access_token=${accessToken}`;
+  const accessToken = 'EAASUpJJr57UBOZCAYScH01SjwZCjPSyOXaK25HFNnVRJEZASElTYrcvrYvCmnUZC9Ai2DGVR9awSWVLcVucD6wWzNlr9l2NnbzSNS9klJMoNTwKF0nTzcS6lqbPBCIJUm2SE2hk8DGbNIaOUKb1l2bc3QP6V2w26qyJNduOTOX57ZAQfgUfWiGtSsjZA5jC3Y296dPuyfVzYKVZCVV7tywZD'; // Replace with your actual User Access Token
+  const apiUrl = `https://graph.facebook.com/v18.0/me/picture?fields=url&access_token=${accessToken}`; 
 
   fetch(apiUrl)
     .then(response => {
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        throw new Error(`HTTP error! status: ${response.status}`); 
       }
       return response.json();
     })
