@@ -35,7 +35,7 @@ window.addEventListener('scroll', () => {
 
 function fetchFacebookProfilePicture() {
   const accessToken = 'EAASUpJJr57UBOZCyLW7jCMtTfAU8XNZBnII4V5KrfTDRibblvCMgspcEuZBTeHZCCHoUmJvMF9QBnfFFFvXQDBA3zkXqrBRZBixANVL6evZB8aZAiT52QLYBo9ic3AXE7LgMZC74oUpZBnUj0i8zZAyCox4y6CC7bn2cZBCZBapucMVhSdLKdqV6NgEbRjDjbmpdSNwe6N92tiGxZBCXlSTGBDQZDZD'; // Replace with your actual access token
-  const apiUrl = `https://graph.facebook.com/v17.0/me/picture?fields=url&access_token=${accessToken}`;
+  const apiUrl = `https://graph.facebook.com/v21.0/me/picture?fields=url&access_token=${accessToken}`;
 
   fetch(apiUrl)
     .then(response => {
