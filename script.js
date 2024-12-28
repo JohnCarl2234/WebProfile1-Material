@@ -34,20 +34,29 @@ window.addEventListener('scroll', () => {
 });
 
 function checkProfilePictureUpdate() {
-  // Fetch the current profile picture URL
-  fetch('https://graph.facebook.com/v17.0/me/picture?fields=url&access_token=EAASUpJJr57UBO9Vj46aQ6ZCgJmP3wB7shewBJxcvcHbXAZCeIJXuzlT5XfDMx9dPjSGUF7ctNQMQf8ZBCtBfWsxjfuXJcuNwKZBBRCCbg3pndiNyw6qYmwZBbyOuWFZArLdq0GSmnfbigc8rF92SCc3LELfWa3mQDMj9JU4iBaZCLTfDPaZCtOhMnly4cTTAkOGQfW65l6TYMJgKSmaGwS9rlwrUQeH0RjZC46qfZCHhJEoH1stcTHIZBbocayCvAwhYwZDZD')
-    .then(response => response.json())
+  const accessToken = 'EAASUpJJr57UBO8QyFRXWNN4QWKLLwj2mR2Crno1LhtKXCqiNK9kdvFbD71Sl3APZCPJVc6x35yNyENKhQ6WfjGILkpEiw6JFWT9pSaktEp2rJufft56HcC7UwE8pg5uJDwCLc3PYmCQuBzRFue6efbaqxhDaWbDzPpHck1mJl2jboLglrFQFjZA9ZB5IjGtTENYMHhEkMrku1tA5wZDZD'; // Replace with your actual access token
+  const apiUrl = `https://graph.facebook.com/v17.0/me/picture?fields=url&access_token=${accessToken}`;
+
+  fetch(apiUrl)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json();
+    })
     .then(data => {
-      // Get the current profile picture URL from the data
-      const currentProfilePictureUrl = data.url;
+      if (data.error) {
+        console.error('Error fetching profile picture:', data.error.message);
+        return; 
+      }
 
-      // Check if the current profile picture URL is different from the stored URL
-      if (currentProfilePictureUrl !== localStorage.getItem('profilePictureUrl')) {
-        // Update the HTML img tag with the new URL
-        document.getElementById('profilePicture').src = currentProfilePictureUrl;
+      const currentUrl = data.url;
+      const storedUrl = localStorage.getItem('profilePictureUrl');
 
-        // Store the new profile picture URL in local storage
-        localStorage.setItem('profilePictureUrl', currentProfilePictureUrl);
+      if (currentUrl !== storedUrl) {
+        const profilePicture = document.getElementById('profilePicture');
+        profilePicture.src = currentUrl; 
+        localStorage.setItem('profilePictureUrl', currentUrl);
       }
     })
     .catch(error => {
