@@ -33,8 +33,8 @@ window.addEventListener('scroll', () => {
   });
 });
 
-function checkProfilePictureUpdate() {
-  const accessToken = 'EAASUpJJr57UBO8QyFRXWNN4QWKLLwj2mR2Crno1LhtKXCqiNK9kdvFbD71Sl3APZCPJVc6x35yNyENKhQ6WfjGILkpEiw6JFWT9pSaktEp2rJufft56HcC7UwE8pg5uJDwCLc3PYmCQuBzRFue6efbaqxhDaWbDzPpHck1mJl2jboLglrFQFjZA9ZB5IjGtTENYMHhEkMrku1tA5wZDZD'; // Replace with your actual access token
+function fetchFacebookProfilePicture() {
+  const accessToken = 'EAASUpJJr57UBOZCyLW7jCMtTfAU8XNZBnII4V5KrfTDRibblvCMgspcEuZBTeHZCCHoUmJvMF9QBnfFFFvXQDBA3zkXqrBRZBixANVL6evZB8aZAiT52QLYBo9ic3AXE7LgMZC74oUpZBnUj0i8zZAyCox4y6CC7bn2cZBCZBapucMVhSdLKdqV6NgEbRjDjbmpdSNwe6N92tiGxZBCXlSTGBDQZDZD'; // Replace with your actual access token
   const apiUrl = `https://graph.facebook.com/v17.0/me/picture?fields=url&access_token=${accessToken}`;
 
   fetch(apiUrl)
@@ -50,13 +50,13 @@ function checkProfilePictureUpdate() {
         return; 
       }
 
-      const currentUrl = data.url;
-      const storedUrl = localStorage.getItem('profilePictureUrl');
+      const profilePictureUrl = data.url;
+      const profilePictureElement = document.getElementById('profilePicture'); 
 
-      if (currentUrl !== storedUrl) {
-        const profilePicture = document.getElementById('profilePicture');
-        profilePicture.src = currentUrl; 
-        localStorage.setItem('profilePictureUrl', currentUrl);
+      if (profilePictureElement) {
+        profilePictureElement.src = profilePictureUrl;
+      } else {
+        console.error('Element with ID "profilePicture" not found.');
       }
     })
     .catch(error => {
@@ -64,8 +64,5 @@ function checkProfilePictureUpdate() {
     });
 }
 
-// Initial check on page load
-checkProfilePictureUpdate();
-
-// Set an interval to check for updates periodically (e.g., every 5 minutes)
-setInterval(checkProfilePictureUpdate, 5 * 60 * 1000);
+// Call the function to fetch and display the profile picture
+fetchFacebookProfilePicture();
