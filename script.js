@@ -35,7 +35,7 @@ window.addEventListener('scroll', () => {
 
 function checkProfilePictureUpdate() {
   // Fetch the current profile picture URL
-  fetch('https://graph.facebook.com/v21.0/me/picture?fields=url&access_token=EAASUpJJr57UBO9Vj46aQ6ZCgJmP3wB7shewBJxcvcHbXAZCeIJXuzlT5XfDMx9dPjSGUF7ctNQMQf8ZBCtBfWsxjfuXJcuNwKZBBRCCbg3pndiNyw6qYmwZBbyOuWFZArLdq0GSmnfbigc8rF92SCc3LELfWa3mQDMj9JU4iBaZCLTfDPaZCtOhMnly4cTTAkOGQfW65l6TYMJgKSmaGwS9rlwrUQeH0RjZC46qfZCHhJEoH1stcTHIZBbocayCvAwhYwZDZD')
+  fetch('https://graph.facebook.com/v17.0/me/picture?fields=url&access_token=EAASUpJJr57UBO9Vj46aQ6ZCgJmP3wB7shewBJxcvcHbXAZCeIJXuzlT5XfDMx9dPjSGUF7ctNQMQf8ZBCtBfWsxjfuXJcuNwKZBBRCCbg3pndiNyw6qYmwZBbyOuWFZArLdq0GSmnfbigc8rF92SCc3LELfWa3mQDMj9JU4iBaZCLTfDPaZCtOhMnly4cTTAkOGQfW65l6TYMJgKSmaGwS9rlwrUQeH0RjZC46qfZCHhJEoH1stcTHIZBbocayCvAwhYwZDZD')
     .then(response => response.json())
     .then(data => {
       // Get the current profile picture URL from the data
