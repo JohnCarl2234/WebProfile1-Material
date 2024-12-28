@@ -35,68 +35,48 @@ window.addEventListener('scroll', () => {
 
 // Image fetcher
 // Load the Google APIs client library
-function loadGapiClient() {
-  return new Promise((resolve, reject) => {
-      gapi.load('client', async () => {
-          try {
-              await gapi.client.init({
-                  apiKey: 'AIzaSyDlFs3Ez2xX-YxPfzxr8Wjxj91yZc8kYDs',
-                  discoveryDocs: [
-                      'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'
-                  ]
-              });
-              resolve();
-          } catch (error) {
-              reject(error);
-          }
-      });
-  });
-}
+function checkAndDisplayPpf() {
+  // Replace with your Google Drive folder ID
+  const folderId = '1GpBOlmHvkh8qMFJ4UOauOY-kTq0oYw2H'; 
 
-async function findImageAndUpdate() {
-  try {
-      // Ensure the client is loaded
-      await loadGapiClient();
+  // Build the Drive API URL
+  const url = `https://www.googleapis.com/drive/v3/files?q='${folderId}' in parents&fields=files(id,name,mimeType)&key=AIzaSyDlFs3Ez2xX-YxPfzxr8Wjxj91yZc8kYDs`; 
 
-      // Find the folder named "leauxmeme"
-      const folderResponse = await gapi.client.drive.files.list({
-          q: "name = 'leauxmeme' and mimeType = 'application/vnd.google-apps.folder'",
-          fields: 'files(id, name)'
-      });
+  // Fetch the files in the folder
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      // Find the "leauxmeme" folder and "ppf" image
+      const leauxmemeFolder = data.files.find(file => file.name === 'leauxmeme');
+      if (leauxmemeFolder) {
+        const ppfImage = leauxmemeFolder.files.find(file => 
+          file.name === 'ppf.jpeg' || file.name === 'ppf.png'
+        );
+        if (ppfImage) {
+          // Construct the image URL (replace with appropriate download URL)
+          const imageUrl = `https://drive.google.com/uc?export=download&id=${ppfImage.id}`; 
 
-      const folder = folderResponse.result.files[0];
-      if (!folder) {
-          console.log('Folder leauxmeme not found');
-          return;
-      }
-
-      // Find the image named "ppf" in the folder
-      const fileResponse = await gapi.client.drive.files.list({
-          q: `name contains 'ppf' and '${folder.id}' in parents and (mimeType = 'image/jpeg' or mimeType = 'image/png')`,
-          fields: 'files(id, name)'
-      });
-
-      const file = fileResponse.result.files[0];
-      if (!file) {
-          console.log('Image file named ppf not found');
-          return;
-      }
-
-      // Get the file's public URL (requires the file to be shared publicly)
-      const fileUrl = `https://drive.google.com/uc?id=${file.id}`;
-
-      // Update the img tag in your HTML
-      const imgTag = document.getElementById('image'); // Make sure your img tag has id="image"
-      if (imgTag) {
-          imgTag.src = fileUrl;
-          console.log('Image updated successfully');
+          // Update the img tag in your HTML
+          const imgElement = document.getElementById('ppfImage'); 
+          imgElement.src = imageUrl; 
+        } else {
+          // Handle case where "ppf" image is not found
+          console.log("ppf.jpeg or ppf.png not found in leauxmeme folder.");
+          // Optionally display a default image or error message
+          imgElement.src = "path/to/default_image.jpg"; 
+        }
       } else {
-          console.log('img tag with id "image" not found');
+        // Handle case where "leauxmeme" folder is not found
+        console.log("leauxmeme folder not found.");
+        // Optionally display a default image or error message
+          imgElement.src = "path/to/default_image.jpg"; 
       }
-  } catch (error) {
-      console.error('Error:', error);
-  }
+    })
+    .catch(error => {
+      console.error('Error fetching Drive files:', error);
+      // Handle errors (e.g., network issues, API errors)
+    });
 }
 
-// Call the function
-findImageAndUpdate();
+// Call the function to check and display the image
+checkAndDisplayPpf();
