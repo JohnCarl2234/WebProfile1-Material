@@ -33,50 +33,32 @@ window.addEventListener('scroll', () => {
   });
 });
 
-// Image fetcher
-// Load the Google APIs client library
-function checkAndDisplayPpf() {
-  // Replace with your Google Drive folder ID
-  const folderId = '1GpBOlmHvkh8qMFJ4UOauOY-kTq0oYw2H'; 
+// Replace with your actual Google Drive folder ID
+const folderId = '1GpBOlmHvkh8qMFJ4UOauOY-kTq0oYw2H'; 
 
-  // Build the Drive API URL
-  const url = `https://www.googleapis.com/drive/v3/files?q='${folderId}' in parents&fields=files(id,name,mimeType)&key=AIzaSyDlFs3Ez2xX-YxPfzxr8Wjxj91yZc8kYDs`; 
-
-  // Fetch the files in the folder
-  fetch(url)
-    .then(response => response.json())
-    .then(data => {
-      // Find the "leauxmeme" folder and "ppf" image
-      const leauxmemeFolder = data.files.find(file => file.name === 'leauxmeme');
-      if (leauxmemeFolder) {
-        const ppfImage = leauxmemeFolder.files.find(file => 
-          file.name === 'ppf.jpeg' || file.name === 'ppf.png'
-        );
-        if (ppfImage) {
-          // Construct the image URL (replace with appropriate download URL)
-          const imageUrl = `https://drive.google.com/uc?export=download&id=${ppfImage.id}`; 
-
-          // Update the img tag in your HTML
-          const imgElement = document.getElementById('ppfImage'); 
-          imgElement.src = imageUrl; 
-        } else {
-          // Handle case where "ppf" image is not found
-          console.log("ppf.jpeg or ppf.png not found in leauxmeme folder.");
-          // Optionally display a default image or error message
-          imgElement.src = "path/to/default_image.jpg"; 
-        }
-      } else {
-        // Handle case where "leauxmeme" folder is not found
-        console.log("leauxmeme folder not found.");
-        // Optionally display a default image or error message
-          imgElement.src = "path/to/default_image.jpg"; 
-      }
-    })
-    .catch(error => {
-      console.error('Error fetching Drive files:', error);
-      // Handle errors (e.g., network issues, API errors)
-    });
+// Function to fetch image URL from Google Drive
+async function getImageFromDrive() {
+  try {
+    const response = await fetch(`https://drive.google.com/uc?export=view&id=${folderId}`); 
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.url; 
+  } catch (error) {
+    console.error('Error fetching image:', error);
+    return null; 
+  }
 }
 
-// Call the function to check and display the image
-checkAndDisplayPpf();
+// Function to update the image source
+async function updateImageSource() {
+  const imageUrl = await getImageFromDrive();
+  if (imageUrl) {
+    const imgElement = document.getElementById('myImage'); 
+    imgElement.src = imageUrl;
+  }
+}
+
+// Initial image load and subsequent updates
+updateImageSource(); 
+setInterval(updateImageSource, 60000); // Update every 60 seconds
