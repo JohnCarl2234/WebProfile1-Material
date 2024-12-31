@@ -33,32 +33,21 @@ window.addEventListener('scroll', () => {
   });
 });
 
-// Replace with your actual Google Drive folder ID
-const folderId = '1GpBOlmHvkh8qMFJ4UOauOY-kTq0oYw2H'; 
+/*
+function syncImageSrc() {
+  // Replace with the actual ID of your Google Drive file
+  const fileId = '1_Eof4WFwqFo6Yju2jNov6PCfaeyuBbop'; 
 
-// Function to fetch image URL from Google Drive
-async function getImageFromDrive() {
-  try {
-    const response = await fetch(`https://drive.google.com/uc?export=view&id=${folderId}`); 
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return response.url; 
-  } catch (error) {
-    console.error('Error fetching image:', error);
-    return null; 
-  }
+  // Construct the direct download URL for the image
+  const imageUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
+
+  // Get the image element (assuming it has the ID "myImage")
+  const imageElement = document.getElementById('myImage');
+
+  // Set the src attribute of the image element
+  imageElement.src = imageUrl;
 }
 
-// Function to update the image source
-async function updateImageSource() {
-  const imageUrl = await getImageFromDrive();
-  if (imageUrl) {
-    const imgElement = document.getElementById('myImage'); 
-    imgElement.src = imageUrl;
-  }
-}
-
-// Initial image load and subsequent updates
-updateImageSource(); 
-setInterval(updateImageSource, 60000); // Update every 60 seconds
+// Call the function to sync the image source on page load
+window.onload = syncImageSrc;
+*/
