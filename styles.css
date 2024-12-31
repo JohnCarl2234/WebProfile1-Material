@@ -20,7 +20,13 @@ body {
     justify-content: flex-start;
     position: sticky;
     top: 0;
+    transition: all 0.3s ease-in-out; /* Smooth animation */
+    opacity: 1; /* Initially hidden */
 }
+
+.show {
+    opacity: 0; /* Show on scroll */
+}  
 
 .element1 {
     box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.4); 

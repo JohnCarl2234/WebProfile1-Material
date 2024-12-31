@@ -53,3 +53,14 @@ function syncImageSrc() {
 // Call the function to sync the image source on page load
 window.onload = syncImageSrc;
 */
+
+//heading container on scroll
+window.addEventListener('scroll', () => {
+  const container = document.querySelector('.element1');
+
+  if (window.scrollY > 200) { // Adjust scroll threshold as needed
+    container.classList.add('show');
+  } else {
+    container.classList.remove('show');
+  }
+});
