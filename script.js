@@ -15,6 +15,8 @@ window.addEventListener('scroll', () => {
     element.classList.remove('animated'); // Remove 'animated' class to stop animation
   }
 }); */
+
+/*
 const animationClass = 'animated'; // Replace with your actual animation class name
 const threshold = window.innerHeight / 2; // Adjust threshold as needed
 
@@ -32,7 +34,7 @@ window.addEventListener('scroll', () => {
     }
   });
 });
-
+*/
 /*
 function syncImageSrc() {
   // Replace with the actual ID of your Google Drive file
